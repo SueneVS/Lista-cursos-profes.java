@@ -40,7 +40,9 @@ public class ListaCursos {
         }
     }
 
-    private static void marcarCursoConcluido(Scanner entrada, List<String> listaCursos) {
+
+
+    private static void marcarCursoConcluido(Scanner entrada, List<String> listaCursos, List<String> listaCursosConcluidos) {
         System.out.print("Informe o indice: ");
         int indice = entrada.nextInt();
 
@@ -48,13 +50,24 @@ public class ListaCursos {
             System.out.println("O curso NÃO existe!");
         } else {
             String item = listaCursos.remove(indice);
+            listaCursosConcluidos.add(item);
             System.out.println("Curso concluído: " + indice + " - " + item + "\n");
+
+        }
+    }
+
+
+    private static void verListaConcluidos(List<String> listaCursosConcluidos) {
+        System.out.println("Cursos concluídos:");
+        for (int i = 0; i < listaCursosConcluidos.size(); i++) {
+            String item = listaCursosConcluidos.get(i);
+            System.out.println(i + " - " + item);
         }
     }
 
 
 
-    private static void menu(Scanner entrada, List<String> listaCursos) {
+    private static void menu(Scanner entrada, List<String> listaCursos, List<String> listaCursosConcluidos) {
         System.out.println("-----------------------------------------");
         System.out.println("|                  MENU                 |");
         System.out.println("-----------------------------------------");
@@ -82,12 +95,12 @@ public class ListaCursos {
                 verLista(listaCursos);
                 break;
             case 4:
-                marcarCursoConcluido(entrada, listaCursos);
+                marcarCursoConcluido(entrada, listaCursos, listaCursosConcluidos);
                 verLista(listaCursos);
                 break;
-            //case 5:
-               // verListaConcluidos();
-                //break;
+            case 5:
+                verListaConcluidos(listaCursosConcluidos);
+                break;
             case 0:
                 System.exit(0);
             default:
@@ -97,7 +110,7 @@ public class ListaCursos {
 
         System.out.println("\n\n\n");
 
-        menu(entrada, listaCursos);
+        menu(entrada, listaCursos, listaCursosConcluidos);
         System.out.println(opcao);
     }
 
@@ -111,7 +124,7 @@ public class ListaCursos {
 
         System.out.println("Bem vindo à lista de cursos");
 
-        menu(entrada, listaCursos);
+        menu(entrada, listaCursos, listaCursosConcluidos);
 
     }
 
